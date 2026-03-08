@@ -1,18 +1,52 @@
-export default function Register() {
-  return (
-    <div>
-      <h1>Register</h1>
+"use client";
 
-      <input placeholder="Nama" />
-      <br /><br />
+import { useState } from "react";
 
-      <input placeholder="Email" />
-      <br /><br />
+export default function Register(){
 
-      <input type="password" placeholder="Password" />
-      <br /><br />
+const [email,setEmail]=useState("");
+const [password,setPassword]=useState("");
 
-      <button>Register</button>
-    </div>
-  );
+const handleRegister=async()=>{
+
+const res=await fetch("/api/register",{
+method:"POST",
+headers:{ "Content-Type":"application/json"},
+body:JSON.stringify({email,password})
+});
+
+const data=await res.json();
+alert(data.message);
+
+}
+
+return(
+
+<div>
+
+<h1>Register</h1>
+
+<input
+placeholder="Email"
+onChange={(e)=>setEmail(e.target.value)}
+/>
+
+<br/><br/>
+
+<input
+type="password"
+placeholder="Password"
+onChange={(e)=>setPassword(e.target.value)}
+/>
+
+<br/><br/>
+
+<button onClick={handleRegister}>
+Register
+</button>
+
+</div>
+
+)
+
 }
