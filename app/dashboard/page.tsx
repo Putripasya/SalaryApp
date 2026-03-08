@@ -1,10 +1,20 @@
+"use client"
+
+import Sidebar from "@/components/Sidebar"
+
 export default function Dashboard(){
 
 return(
 
-<div>
+<div style={{display:"flex"}}>
 
-<h1>Dashboard Salary System</h1>
+<Sidebar/>
+
+<div style={{padding:"20px"}}>
+
+<h1>Dashboard</h1>
+
+</div>
 
 </div>
 

@@ -1,22 +1,30 @@
-"use client";
+"use client"
 
-import { useState } from "react";
+import { useState } from "react"
+import { useRouter } from "next/navigation"
 
-export default function Login() {
+export default function Login(){
 
-const [email,setEmail]=useState("");
-const [password,setPassword]=useState("");
+const router = useRouter()
 
-const handleLogin=async()=>{
+const [email,setEmail] = useState("")
+const [password,setPassword] = useState("")
 
-const res=await fetch("/api/login",{
-method:"POST",
-headers:{ "Content-Type":"application/json"},
-body:JSON.stringify({email,password})
-});
+const handleLogin = () => {
 
-const data=await res.json();
-alert(data.message);
+if(email === "hrd@mail.com" && password === "hrd123"){
+localStorage.setItem("role","admin")
+router.push("/dashboard")
+}
+
+else if(email === "user@gmail.com" && password === "12345678"){
+localStorage.setItem("role","user")
+router.push("/dashboard")
+}
+
+else{
+alert("Login gagal")
+}
 
 }
 
@@ -31,15 +39,11 @@ placeholder="Email"
 onChange={(e)=>setEmail(e.target.value)}
 />
 
-<br/><br/>
-
 <input
 type="password"
 placeholder="Password"
 onChange={(e)=>setPassword(e.target.value)}
 />
-
-<br/><br/>
 
 <button onClick={handleLogin}>
 Login
